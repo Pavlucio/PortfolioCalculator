@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Portfolio Gain</h1>
+    <p>Currency: {{ base_currency }}</p>
+    <p>Portfolio name: {{ portfolio }}</p>
+
+     {% if data_gain_abs_any %}
+        <table class="table table-bordered">
+            <thead>
+                <td>Date</td>
+                {% for column in data_gain_abs.columns %}
+                    <td>
+                        {{ column }}
+                    </td>
+                {% endfor %}
+            </thead>
+            <tbody>
+            {% for index, row in data_gain_abs.iterrows %}
+                <tr>
+                    <td>{{ index }}</td>
+                    {% for cell in row %}
+                        <td>
+                            {{ cell }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No result to display.</p>
+    {% endif %}
+    <br>
+     {% if data_gain_any %}
+        <table class="table table-bordered">
+            <thead>
+                <td>Date</td>
+                {% for column in data_gain.columns %}
+                    <td>
+                        {{ column }}
+                    </td>
+                {% endfor %}
+            </thead>
+            <tbody>
+            {% for index, row in data_gain.iterrows %}
+                <tr>
+                    <td>{{ index }}</td>
+                    {% for cell in row %}
+                        <td>
+                            {{ cell }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No result to display.</p>
+    {% endif %}
+    {% if image_3_url %}
+        <img src="{{ image_3_url }}" alt="Matplotlib Figure">
+    {% endif %}
+    {% if image_4_url %}
+        <img src="{{ image_4_url }}" alt="Matplotlib Figure">
+    {% endif %}
+    <br>
+    <a href="{% url 'portfolio_detail' pk %}" class="btn btn-primary">Back</a>
+{% endblock %}

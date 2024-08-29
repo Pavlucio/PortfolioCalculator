@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>My Portfolios</h1>
+
+    {% if portfolio_list %}
+    <ul>
+
+      {% for portfolio in portfolio_list %}
+      <li>
+        <a href="{% url 'portfolio_detail' portfolio.pk %}">{{portfolio.title}}</a> ({{ portfolio.created }})
+          <a class="btn btn-primary" href="{% url 'portfolio_update' portfolio.pk %}">Change name</a>
+          <a class="btn btn-primary" href="{% url 'portfolio_delete' portfolio.pk %}">Delete</a>
+      </li>
+      {% endfor %}
+    </ul>
+
+    {% else %}
+      <p>You don't have Portfolios.</p>
+    {% endif %}
+    <h2>Add New Portfolio</h2>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li>{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit">Add Portfolio</button>
+    </form>
+{% endblock %}
+

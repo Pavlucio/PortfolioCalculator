@@ -1,0 +1,47 @@
+ {% extends "base.html" %}
+
+{% block content %}
+     <h1>Portfolio Current Price</h1>
+    <p>Currency: {{ base_currency }}</p>
+    <p>Portfolio: {{ portfolio }}</p>
+    <!-- Display method one results here -->
+     {% if df_app_any %}
+        <table class="table table-bordered">
+            <thead>
+                {% for column in df_app.columns %}
+                    <td>
+                        {{ column }}
+                    </td>
+                {% endfor %}
+            </thead>
+            <tbody>
+            {% for index, row in df_app.iterrows %}
+                <tr>
+                    {% for cell in row %}
+                        <td>
+                            {{ cell }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+            <tfoot>
+                <td>Total</td>
+                <td colspan=5></td>
+                <td>{{ portfolio_value }}</td>
+            </tfoot>
+        </table>
+
+        <h3>Total value: {{ portfolio_value }} {{ base_currency }}</h3>
+        {% if image_url %}
+            <img src="{{ image_url }}" alt="Matplotlib Figure">
+        {% endif %}
+    {% else %}
+        <p>No result to display.</p>
+    {% endif %}
+ <br>
+    <a href="{% url 'portfolio_detail' pk %}" class="btn btn-primary">Back</a>
+{% endblock %}
+
+
+

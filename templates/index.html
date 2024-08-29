@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h3>PortfolioCalculator App Description</h3>
+
+    <p><strong>PortfolioCalculator App Description The app PortfolioCalculator is created for educational reasons and is getting data from publicly available open-source APIs and libraries: Frankfurter API and yfinance 0.2.43.</strong></p>
+
+    <p>PortfolioCalculator has the following features:</p>
+    <ul>
+            <li>Create user</li>
+            <li>Login / Logout</li>
+            <li>Change Password</li>
+            <li>Each user can create /delete Portfolios (title, date created)</li>
+            <li>Portfolio title can be changed</li>
+            <li>Portfolios can contain Items (ticker, quantity)</li>
+            <li>Each user can add / edit / delete items to/from Portfolios</li>
+            <li>Each user can see and manipulate only his Portfolios and Items</li>
+            <li>When entering new Item ticker name, PortfolioCalculator checks this Ticker existence in yfinance library</li>
+            <li>If ticker name does not exist, the corresponding message appears</li>
+            <li>If Items with same ticker name already exists in this Portfolio, the corresponding message appears</li>
+            <li>Three operations can be performed with PortfolioCalculator with Currencies available from
+                Frankfurter API: get Portfolio current price, get Portfolio historical prices within 1-year at
+                1-month interval and get gain from the beginning of each month within last year.</li>
+            <li>Get Portfolio current price: returns table with Portfolios each ticker current market price,
+            currency, total ticker price, exchange rate to base currency, total ticker price in base currency,
+             total Portfolio price in base currency, date and time of request. Also method returns a pie chart of all
+                Portfolio tickers with values, percentage in portfolio.</li>
+            <li>Get Portfolio historical prices within 1-year at 1-month interval</li>
+            <li>Get gain from the beginning of each month within last year.</li>
+    </ul>
+
+    <p><strong>IMPORTANT:</strong> correct ticker names you should look on
+                <a href="https://finance.yahoo.com/">https://finance.yahoo.com/</a> internet page.
+            Just write the Company name in Search bar on the top of the page, select the appropriate ticker,
+             corresponding your company and fill in the field when adding tickers.</p>
+    <p><a href="https://capital.com/ticker-definition">Here</a> you can find detailed information about ticker symbol definition.</p>
+
+    <p>Additional possible features to include in the future (NOT AVAILABLE NOW):</p>
+
+    <ul>
+            <li>Make that the lit for Currency selection would be obtained from Frankfurter API</li>
+            <li>Make that ticker also contain information about when and for what price it was bought,
+            and each time it is bought the average bought price and average currency exchange rate calculated.</li>
+            <li>When we would hav average price and exchange rate we can make method to calculate gain correspondingly
+                to the buy price</li>
+            <li>Make that when new user is created that profile would also be created (with signals)</li>
+            <li>Make method to obtain dividends from every ticker and total dividends</li>
+            <li>Make method to enter the date and then calculate the gain from entered date to current date.</li>
+            <li>Make intraday app to calculate history and gain during the day session.</li>
+    </ul>
+
+    <p><strong>*** IMPORTANT LEGAL DISCLAIMER ***
+    Yahoo!, Y!Finance, and Yahoo! finance are registered trademarks of Yahoo, Inc. yfinance is not affiliated, endorsed,
+      or vetted by Yahoo, Inc. It's an open-source tool that uses Yahoo's publicly available APIs, and is intended for
+      research and educational purposes. You should refer to Yahoo!'s terms of use (<a href="https://policies.yahoo.com/us/en/yahoo/terms/product-atos/apiforydn/index.htm">here</a>, <a href="https://legal.yahoo.com/us/en/yahoo/terms/otos/index.html">here</a>, and <a href="https://legal.yahoo.com/us/en/yahoo/terms/otos/index.html">here</a>) for details
+      on your rights to use the actual data downloaded. Remember - the Yahoo! finance API is intended for
+      personal use only.</strong></p>
+
+<p><strong>Legal Stuff
+yfinance is distributed under the Apache Software License. See the LICENSE.txt file in the release for details.
+
+AGAIN - yfinance is not affiliated, endorsed, or vetted by Yahoo, Inc. It's an open-source tool that uses Yahoo's publicly available APIs, and is intended for research and educational purposes. You should refer to Yahoo!'s terms of use (<a href="https://policies.yahoo.com/us/en/yahoo/terms/product-atos/apiforydn/index.htm">here</a>, <a href="https://legal.yahoo.com/us/en/yahoo/terms/otos/index.html">here</a>, and <a href="https://legal.yahoo.com/us/en/yahoo/terms/otos/index.html">here</a>) for details on your rights to use the actual data downloaded.</strong></p>
+
+  <p> For yfinance documentation please follow this <a href="https://pypi.org/project/yfinance/">link.</a></p>
+
+  <p>Frankfurter is an open-source API for current and historical foreign exchange rates published by the European Central Bank</p>
+
+<p>For Frankfurter API documentation please follow this <a href="https://www.frankfurter.app/docs/">link.</a></p>
+
+
+{% endblock %}

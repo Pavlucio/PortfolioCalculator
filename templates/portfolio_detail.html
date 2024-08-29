@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>{{ portfolio.title }} {{ portfolio.created }}</h1>
+
+
+  <div style="margin-left:20px;margin-top:20px">
+    <h4>Portfolio items:</h4>
+    <br>
+    <table class="table-sm table-bordered">
+      <tr>
+        <td><strong>Ticker</strong></td>
+        <td><strong>Quantity</strong></td>
+        <td><strong>Created</strong></td>
+      </tr>
+
+      {% for stock in portfolio.stocks.all %}
+        <tr>
+          <td>{{ stock.ticker }}</td>
+          <td>{{ stock.quantity }}</td>
+          <td>{{ stock.created }}</td>
+          <td><a class="btn btn-primary" href="{% url 'update_item' stock.pk %}">Edit</a></td>
+          <td><a class="btn btn-primary" href="{% url 'delete_item' stock.pk %}">Delete</a></td>
+        </tr>
+      {% endfor %}
+    </table>
+    <br>
+    <h2>Add New Item</h2>
+      <form method="post">
+          {% csrf_token %}
+          {{ item_form.as_p }}
+          <button class="btn btn-primary" type="submit" name="add_item">Add Item</button>
+      </form>
+    <br>
+    <h1>Portfolio {{ portfolio.name }} data: </h1>
+    <br>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary" type="submit" name="current">Current price</button>
+        <button class="btn btn-primary" type="submit" name="history">History</button>
+        <button class="btn btn-primary" type="submit" name="gain">Gain</button>
+    </form>
+  </div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Portfolio History</h1>
+    <p>Currency: {{ base_currency }}</p>
+    <p>Portfolio: {{ portfolio }}</p>
+
+     {% if portfolio_history_any %}
+        <table class="table table-bordered">
+            <thead>
+                <td>Date</td>
+                {% for column in portfolio_history.columns %}
+                    <td>
+                        {{ column }}
+                    </td>
+                {% endfor %}
+            </thead>
+            <tbody>
+            {% for index, row in portfolio_history.iterrows %}
+                <tr>
+                    <td>{{ index }}</td>
+                    {% for cell in row %}
+                        <td>
+                            {{ cell }}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No result to display.</p>
+    {% endif %}
+    {% if image_1_url %}
+        <img src="{{ image_1_url }}" alt="Matplotlib Figure">
+    {% endif %}
+    {% if image_2_url %}
+        <img src="{{ image_2_url }}" alt="Matplotlib Figure">
+    {% endif %}
+    <br>
+    <a href="{% url 'portfolio_detail' pk %}" class="btn btn-primary">Back</a>
+{% endblock %}
