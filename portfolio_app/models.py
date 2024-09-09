@@ -23,6 +23,7 @@ class Item(models.Model):
     quantity = models.IntegerField()
     created = models.DateField(auto_now_add=True)
 
+
     class Meta:
         ordering = ['ticker']
 

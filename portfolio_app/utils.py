@@ -140,6 +140,7 @@ class Calculator:
 
         new_dates_of_period_str = []
         new_dates_of_period = []
+        start_date = ''
 
         for stock in self.data['stocks']:
             ticker_yahoo = yf.Ticker(stock)
@@ -153,11 +154,15 @@ class Calculator:
                 new_dates_of_period_str.append(date_to_str)
                 date_datetime = datetime.datetime.strptime(date_to_str, '%Y-%m-%d')
                 new_dates_of_period.append(date_datetime)
+
+            start_datetime = new_dates_of_period[0] - datetime.timedelta(days=30)
+            start_date = start_datetime.strftime('%Y-%m-%d')
             break
 
-        start_date = new_dates_of_period_str[0]
+        # start_date = new_dates_of_period_str[0]
         end_date = new_dates_of_period_str[-1]
         exchange_rates = self.get_rates_by_date(self.base_currency, start_date, end_date)
+        print(exchange_rates)
 
         portfolio_history = pd.DataFrame(data=new_dates_of_period, columns=['Date'])
         portfolio_history.set_index('Date', inplace=True)
@@ -197,6 +202,7 @@ class Calculator:
                 if time_to_datetime.day == 1:
                     time_to_datetime = time_to_datetime - datetime.timedelta(days=1)
                 date_to_str = time_to_datetime.strftime('%Y-%m-%d')
+                print(date_to_str)
 
                 if stock_currency != self.base_currency:
                     while True:
