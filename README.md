@@ -30,6 +30,9 @@ source venv/bin/activate  # On Windows use `venv\Scripts\activate`
 
 # Install the dependencies
 pip install -r requirements.txt
+
+# Run migrations to create necessary databse tables
+python manage.py migrate
 ```
 ## Usage
 Instructions on how to run the project.
