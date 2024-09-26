@@ -7,7 +7,7 @@ from django.views import generic
 from portfolio_project import settings
 from .models import Portfolio, Item
 from .forms import CurrencyForm, ItemForm, PortfolioForm, ItemUpdateForm
-from .utils import convert_to_data, Calculator
+from .utils import Calculator
 from django.contrib.auth.forms import User
 from django.views.decorators.csrf import csrf_protect
 from django.contrib import messages
@@ -118,7 +118,7 @@ def portfolio_detail(request, pk):
     form = CurrencyForm(initial={'portfolio_id': pk})
     item_form = ItemForm()
 
-    data = {'stocks': {}}
+
     if request.method == 'POST':
         if 'add_item' in request.POST:
             item_form = ItemForm(request.POST)
@@ -143,8 +143,8 @@ def portfolio_detail(request, pk):
             if form.is_valid():
                 base_currency = form.cleaned_data['base_currency']
                 portfolio_id = form.cleaned_data['portfolio_id']
-                data = convert_to_data(portfolio, data)
-                calculator = Calculator(data, base_currency)
+                # data = convert_to_data(portfolio, data)
+                calculator = Calculator(portfolio, base_currency)
                 if 'current' in request.POST:
                     df, df_app, portfolio_value, time_of_request, image_name = calculator.current_portfolio_value()
                     image_url = os.path.join(settings.MEDIA_URL, image_name) if image_name else None

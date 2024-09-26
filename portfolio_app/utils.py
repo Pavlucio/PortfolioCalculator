@@ -10,31 +10,32 @@ import matplotlib.pyplot as plt
 from portfolio_project import settings
 
 
-def convert_to_data(portfolio, data):
-    """
-    This method converts selected class Portfolio object from database to the dictionary which is suitable for class for
-    below class Calculator methods:current_portfolio_value, get_history, get_gain
-    :param portfolio: selected class 'portfolio_app.models.Portfolio'
-    :param data: empty dictionary with pre-defined initial structure data = {'stocks': {}}
-    :return: dictionary with ticker names as a keys and quantities as a values.
-    """
-
-    for stock in portfolio.stocks.all():
-        data['stocks'][stock.ticker] = {'amount': stock.quantity}
-    return data
-
 class Calculator:
 
-    def __init__(self, data, base_currency):
+    def __init__(self, portfolio, base_currency):
         """
         When creating class Calculator object we are initializing data and base currency variables. Data is
          Portfolio item data necessary for calculations. base_currency is a currency in which our results will
           be expressed.
-        :param data: dictionary with ticker names as a keys and quantities as a values;
+        :param portfolio: dictionary with ticker names as a keys and quantities as a values;
         :param base_currency: currency code, string.
         """
-        self.data = data
+        self.portfolio = portfolio
+        self.data = self.convert_to_data()
         self.base_currency = base_currency
+
+    def convert_to_data(self):
+        """
+        This method converts selected class Portfolio object from database to the dictionary which is suitable for class for
+        below class Calculator methods:current_portfolio_value, get_history, get_gain
+        :return: dictionary with ticker names as a keys and quantities as a values.
+        """
+
+        data = {'stocks': {}}
+
+        for stock in self.portfolio.stocks.all():
+            data['stocks'][stock.ticker] = {'amount': stock.quantity}
+        return data
 
     def current_portfolio_value(self):
         """
